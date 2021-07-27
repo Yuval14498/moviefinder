@@ -1,0 +1,20 @@
+body {
+    height: 100%;
+    background: linear-gradient(#f8f9fa, #adb5bd);
+}
+
+.container {
+    min-height: 100vh;
+}
+
+.bio {
+    font-size: 1.30em
+}
+
+img {
+    border-radius: 5px;
+}
+
+.list-group-item {
+    background-color: transparent;
+}
