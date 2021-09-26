@@ -1,5 +1,6 @@
 body {
     background: linear-gradient(#f8f9fa, #adb5bd);
+    overflow-x: hidden;
 }
 
 h1 {
@@ -7,13 +8,14 @@ h1 {
     text-align: center;
     font-size: 4em;
     color: black;
-    font-family: 'Oswald', sans-serif;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     padding: 20px 0;
+    font-family: 'Oswald', sans-serif;
 }
 
-.cuscard {
+.custom-card {
+    font-family: 'Oswald', sans-serif;
     position: relative;
     max-height: 525px;
     max-width: 350px;
@@ -25,12 +27,11 @@ h1 {
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
 }
 
-.cuscard:hover {
+.custom-card:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.postertext {
-    font-family: 'Oswald', sans-serif;
+.custom-card-body {
     border-radius: 5px;
     font-size: 2em;
     position: absolute;
@@ -40,7 +41,6 @@ h1 {
     right: 0;
     background: rgba(255, 255, 255, 0.8);
     color: black;
-    visibility: hidden;
     opacity: 0;
     display: flex;
     text-align: center;
@@ -50,18 +50,13 @@ h1 {
     transition: opacity .2s, visibility .2s;
 }
 
-.cuscard:hover .postertext {
+.custom-card:hover .custom-card-body {
     visibility: visible;
     opacity: 1;
 }
 
 .title .score {
     transition: .2s;
-    transform: translateY(1em);
-}
-
-.cuscard:hover .title .score {
-    transform: translateY(0);
 }
 
 .score {
@@ -82,6 +77,10 @@ img {
     min-height: 525px;
 }
 
+footer a {
+    text-decoration: none;
+}
+
 /* Pagination */
 
 .pagination-outer {
@@ -89,7 +88,6 @@ img {
 }
 
 .pagination {
-    font-family: 'Itim', cursive;
     border-radius: 10px 10px 0 0;
     border-top: 10px solid #ff9f1a;
     display: inline-flex;
@@ -123,6 +121,11 @@ img {
     height: 41px;
     margin: -5px 0 -3px;
     border: 1px solid #ff9f1a;
+}
+
+.page-item.disabled .page-link {
+    background-color: #afb6be;
+    border-color: #afb6be;
 }
 
 @media only screen and (max-width: 480px) {

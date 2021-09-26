@@ -1,4 +1,4 @@
-.actorbtn {
+.actor-button {
     display: inline;
     margin-right: 20px;
     letter-spacing: 2px;
@@ -9,7 +9,7 @@
     border-radius: 4px !important
 }
 
-.actorbtn i {
+.actor-button i {
     margin-right: 5px
 }
 
@@ -18,7 +18,7 @@
     margin-bottom: 0
 }
 
-.actorbtn.btn-small {
+.actor-button.btn-small {
     font-size: 11px;
     padding: 2px 14px;
     letter-spacing: 1px
