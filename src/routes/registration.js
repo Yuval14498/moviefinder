@@ -7,7 +7,7 @@ const registration = require('../controllers/registration')
 
 router
   .route("/")
-  .get(catchAsync(registration.renderRegistrationForm))
+  .get(registration.renderRegistrationForm)
   .post(catchAsync(registration.registerAccount));
 
 module.exports = router;
