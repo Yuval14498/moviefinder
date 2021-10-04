@@ -15,7 +15,8 @@ const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const MongoStore = require('connect-mongo');
 const mongoSanitize = require('express-mongo-sanitize');
-const dbUrl = process.env.DB_URL
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/movies-app"
+const secret = process.end.SESSION_SECRET || "nonproductionsecret"
 
 //Routes
 const movies = require("./routes/movies");
@@ -26,7 +27,7 @@ const users = require("./routes/users");
 const actors = require("./routes/actors");
 const helmet = require("helmet");
 
-mongoose.connect(dbUrl || "mongodb://localhost:27017/movies-app", {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -39,12 +40,12 @@ db.once("open", function () {
 });
 
 const sessionConfig = {
-  secret: process.env.SESSION_SECRET || "nonproductionsecret",
-  store: MongoStore.create({ mongoUrl: dbUrl, mongoOptions: { useUnifiedTopology: true } }),
+  secret,
+  store: MongoStore.create({ mongoUrl: dbUrl, mongoOptions: { useUnifiedTopology: true }, crypto: secret }),
   resave: false,
   saveUninitialized: true,
+  name: "session",
   cookie: {
-    name: "session",
     httpOnly: true,
     /*     secure: true, */
     maxAge: 1000 * 60 * 60 * 24 * 7,
