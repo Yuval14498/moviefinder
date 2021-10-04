@@ -1,11 +1,11 @@
+const path = require('path')
 if ((process.env.NODE_ENV = "development")) {
-  require("dotenv").config({ path: './.env' });
+  require("dotenv").config({ path: path.join(__dirname, '../.env') });
 }
 
 //Variables
 const express = require("express");
 const app = express();
-const path = require('path');
 const mongoose = require("mongoose");
 const { User } = require("./models/users");
 const session = require("express-session");
@@ -46,7 +46,7 @@ const sessionConfig = {
   cookie: {
     name: "session",
     httpOnly: true,
-    secure: true,
+    /*     secure: true, */
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
