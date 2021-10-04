@@ -110,6 +110,6 @@ app.use((err, req, res, next) => {
 });
 
 //Express listener
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("LISTENING ON PORT 3000");
 });
