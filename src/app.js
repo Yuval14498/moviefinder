@@ -1,10 +1,11 @@
 if ((process.env.NODE_ENV = "development")) {
-  require("dotenv").config({ path: '../.env' });
+  require("dotenv").config({ path: './.env' });
 }
 
 //Variables
 const express = require("express");
 const app = express();
+const path = require('path');
 const mongoose = require("mongoose");
 const { User } = require("./models/users");
 const session = require("express-session");
@@ -50,10 +51,8 @@ const sessionConfig = {
   },
 };
 
-scriptSrcUrls = ["https://cdn.jsdelivr.net/"]
-
-app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs');
 
 app.use(session(sessionConfig));
 app.use(flash());
@@ -63,12 +62,18 @@ app.use(methodOverride("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(mongoSanitize());
+
+const scriptSrcUrls = ["https://kit.fontawesome.com/", "https://cdn.jsdelivr.net"]
+const styleSrcUrls = ["https://ka-f.fontawesome.com/", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com/"]
+
 app.use(helmet())
 app.use(
   helmet.contentSecurityPolicy({
     useDefaults: true,
     directives: {
-      scriptSrc: ["'unsafe-inline'", "'self'", scriptSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'unsafe-inline'", "'self'", ...styleSrcUrls],
+      connectSrc: ["'self'", "https://ka-f.fontawesome.com/"],
       imgSrc: [
         "'self'",
         "blob:",
