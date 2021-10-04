@@ -13,6 +13,8 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const methodOverride = require("method-override");
 const MongoStore = require('connect-mongo');
+const mongoSanitize = require('express-mongo-sanitize');
+const dbUrl = process.env.DB_URL
 
 //Routes
 const movies = require("./routes/movies");
@@ -21,8 +23,9 @@ const login = require("./routes/login");
 const logout = require("./routes/logout");
 const users = require("./routes/users");
 const actors = require("./routes/actors");
+const helmet = require("helmet");
 
-mongoose.connect("mongodb://localhost:27017/movies-app", {
+mongoose.connect(dbUrl || "mongodb://localhost:27017/movies-app", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -35,15 +38,21 @@ db.once("open", function () {
 });
 
 const sessionConfig = {
-  secret: "nonproductionsecret",
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/movies-app', mongoOptions: { useUnifiedTopology: true }}),
+  secret: process.env.SESSION_SECRET || "nonproductionsecret",
+  store: MongoStore.create({ mongoUrl: dbUrl, mongoOptions: { useUnifiedTopology: true } }),
   resave: false,
   saveUninitialized: true,
   cookie: {
+    name: "session",
     httpOnly: true,
+    secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
+
+scriptSrcUrls = ["https://cdn.jsdelivr.net/"]
+
+
 
 app.use(session(sessionConfig));
 app.use(flash());
@@ -52,6 +61,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(mongoSanitize());
+app.use(helmet())
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      scriptSrc: ["'unsafe-inline'", "'self'", scriptSrcUrls],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://image.tmdb.org/",
+        "https://images.unsplash.com/"]
+    },
+  })
+);
 
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
