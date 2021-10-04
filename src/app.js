@@ -16,7 +16,7 @@ const methodOverride = require("method-override");
 const MongoStore = require('connect-mongo');
 const mongoSanitize = require('express-mongo-sanitize');
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/movies-app"
-const secret = process.end.SESSION_SECRET || "nonproductionsecret"
+const secret = process.env.SESSION_SECRET || "nonproductionsecret"
 
 //Routes
 const movies = require("./routes/movies");
@@ -41,7 +41,13 @@ db.once("open", function () {
 
 const sessionConfig = {
   secret,
-  store: MongoStore.create({ mongoUrl: dbUrl, mongoOptions: { useUnifiedTopology: true }, crypto: secret }),
+  store: MongoStore.create({
+    mongoUrl: dbUrl,
+    mongoOptions: { useUnifiedTopology: true },
+    crypto: {
+      secret
+    },
+  }),
   resave: false,
   saveUninitialized: true,
   name: "session",
