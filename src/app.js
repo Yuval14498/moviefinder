@@ -70,8 +70,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(mongoSanitize());
 
-const scriptSrcUrls = ["https://kit.fontawesome.com/", "https://cdn.jsdelivr.net"]
-const styleSrcUrls = ["https://ka-f.fontawesome.com/", "https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com/"]
+const scriptSrcUrls = ["https://cdn.jsdelivr.net"]
+const styleSrcUrls = ["https://fonts.googleapis.com/", "https://cdn.jsdelivr.net/", "https://cdnjs.cloudflare.com/"]
 
 app.use(helmet())
 app.use(
@@ -80,7 +80,6 @@ app.use(
     directives: {
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
       styleSrc: ["'unsafe-inline'", "'self'", ...styleSrcUrls],
-      connectSrc: ["'self'", "https://ka-f.fontawesome.com/"],
       imgSrc: [
         "'self'",
         "blob:",

@@ -20,13 +20,13 @@
 <body>
   <%- include('partials/navbar'); -%>
     <%- include('partials/flash'); -%>
-      <div class="container">
-        <h1 class="mt-5">Your Watchlist</h1>
-        <div class="row">
+      <div class="container mb-5">
+        <h1>Your Watchlist</h1>
+        <div class="row m-auto">
           <% if(movies.length) { %>
             <% for(let movie of movies) { %>
-              <div class="col-md-4">
-                <div class="card" style="width: 20rem">
+              <div class="col-md-6 col-xl-4">
+                <div class="card mx-auto mt-5" style="width: 20rem">
                   <img src="http://image.tmdb.org/t/p/w500<%=movie.poster_path%>" class="card-img-top"
                     alt="Movie poster" />
                   <div class="card-body">

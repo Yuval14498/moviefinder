@@ -6,6 +6,7 @@ body {
     height: 100%;
     background: linear-gradient(#f8f9fa, #adb5bd);
     overflow-x: hidden;
+    position: relative;
 }
 
 nav {
@@ -18,10 +19,6 @@ p {
     overflow-y: auto;
 }
 
-img {
-    border-radius: 5px;
-}
-
 footer {
     width: 100%;
     position: absolute;
@@ -30,6 +27,13 @@ footer {
 
 .container {
     height: 100%;
+}
+
+.actor-image {
+    border-radius: 5px;
+    width: auto;
+    height: 632px;
+    object-fit: cover;
 }
 
 .info {
@@ -59,13 +63,12 @@ footer {
     color: #000;
 }
 
-.known-for-item img {
+.known-for-item-img {
     min-height: 250px;
     width: 100%;
     object-fit: cover;
+    border-radius: 5px;
 }
-
-/*Scroll bar*/
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -79,4 +82,79 @@ footer {
 ::-webkit-scrollbar-thumb {
     background: grey;
     border-radius: 10px;
+}
+
+@media (max-width: 1400px) {
+    .container {
+        width: 100%;
+        max-width: unset;
+    }
+}
+
+@media (max-width: 1200px) {
+    p {
+        max-height: 350px;
+    }
+    .actor-image {
+        height: auto;
+        width: 100%;
+    }
+    .known-for-container {
+        height: auto;
+    }
+    .known-for-item {
+        width: fit-content;
+        margin-right: 0.5rem;
+    }
+    .known-for-item:last-of-type {
+        margin-right: 0;
+    }
+    .known-for-item-img {
+        min-height: unset;
+    }
+    .known-for-item span {
+        display: none;
+    }
+}
+
+@media (max-width: 991px) {
+    html, body, .container {
+        height: auto;
+    }
+    p {
+        margin: 1.5rem 0 1.5rem 0;
+    }
+    .actor-image {
+        height: 530px;
+        width: auto;
+        margin: 0 auto;
+        margin-top: 56px;
+    }
+    .container {
+        padding: 12px;
+    }
+    .known-for-container {
+        margin-bottom: 2rem;
+    }
+    .known-for-item {
+        max-height: unset;
+    }
+}
+
+@media (max-width: 400px) {
+    .actor-image {
+        width: 100%;
+        height: auto;
+    }
+    .known-for-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .known-for-heading {
+        text-align: center !important;
+    }
+    .known-for-item {
+        margin: 0 auto;
+        margin-bottom: 0.5rem;
+    }
 }

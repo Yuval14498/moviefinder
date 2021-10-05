@@ -13,22 +13,40 @@ footer {
 body {
     height: 100vh;
     background-image: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80');
-    background-size: 100% 100%;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
 }
 
 .container {
     height: 100%;
-}
-
-.container {
     color: white;
     font-size: 1.5em;
     font-weight: 200;
+}
+
+.row {
+    width: 450px !important;
 }
 
 .alert {
     position: absolute;
     margin-top: 56px;
     width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .row {
+        width: 450px !important;
+    }
+}
+
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 576px) {
+    .row {
+        width: 100% !important;
+    }
 }

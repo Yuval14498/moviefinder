@@ -2,11 +2,14 @@
     --gradient: linear-gradient(#F7971E, #FFD200);
 }
 
+html {
+    min-height: 100vh;
+}
+
 body {
     background: linear-gradient(#f8f9fa, #adb5bd);
     background-repeat: no-repeat;
-    min-height: 100vh;
-    position: relative;
+    height: 100%;
 }
 
 .container {
@@ -21,7 +24,8 @@ h1 {
     font-family: 'Oswald', sans-serif;
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
-    padding: 20px 0;
+    padding: 10px 0;
+    margin-bottom: 0;
 }
 
 footer {
@@ -35,7 +39,6 @@ footer {
     background: #222;
     border: 1px solid;
     color: rgba(250, 250, 250, 0.8);
-    margin: 3rem;
 }
 
 .card-btn {
@@ -58,4 +61,25 @@ footer {
     -webkit-text-fill-color: #fff !important;
     border: 5px solid #fff !important;
     box-shadow: #222 1px 0 10px;
+}
+
+@media (max-width: 1200px) {
+    html, body:after {
+        content: "";
+        display: block;
+        overflow: auto;
+    }
+    body {
+        position: relative;
+    }
+}
+
+@media (max-width: 992px) {}
+
+@media (max-width: 768px) {}
+
+@media (max-width: 576px) {
+    .card {
+        width: auto !important;
+    }
 }
