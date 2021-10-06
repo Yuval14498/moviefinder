@@ -18,7 +18,7 @@
 <body>
     <%- include('partials/navbar'); -%>
         <%- include('partials/flash'); -%>
-            <div class="container-fluid">
+            <div class="container-fluid main-container">
                 <h1>
                     <%= title %> Movies
                 </h1>
@@ -34,31 +34,30 @@
                     </div>
                 </form>
                 <div class="row">
-                        <% for(let movie of movies.data.results) { %>
-                            <div class="col-12 col-sm-6 col-md-4 col-xxl-3">
-                                <a href="/movies/<%=movie.id%>" style="text-decoration: none; color: black;">
-                                    <% if(movie.poster_path && movie.poster_path.length ){ %>
-                                        <div class="custom-card mt-5">
-                                            <img src="http://image.tmdb.org/t/p/w500<%=movie.poster_path%>" alt="">
-                                            <div class="custom-card-body">
-                                                <div class="title">
-                                                    <%=movie.original_title%>
-                                                </div>
-                                                <% if(movie.vote_average !==0 ) { %>
-                                                    <div class="score m-0 mt-1">
-                                                        <%=movie.vote_average%>
-                                                    </div>
-                                                    <% } %>
-                                            </div>
-                                        </div>
+                    <% for(let movie of movies.data.results) { %>
+                        <div class="col-6 col-md-4 col-xxl-3">
+                            <a href="/movies/<%=movie.id%>" style="text-decoration: none; color: black;">
+                                <div class="custom-card mt-5">
+                                    <% if(movie.poster_path){ %>
+                                        <img src="http://image.tmdb.org/t/p/w500<%=movie.poster_path%>"
+                                            alt="Movie poster">
                                         <% } else {%>
-                                            <div class="custom-card d-flex align-items-center justify-content-center">
-                                                <%=movie.original_title%>
-                                            </div>
+                                            <img src="/images/image-placeholder-cropped.jpg" alt="Missing image alt">
                                             <% } %>
-                                </a>
-                            </div>
-                            <% } %>
+                                                <div class="custom-card-body <%=!movie.poster_path ? "reveal-info" : null%>">
+                                                    <div class="title">
+                                                        <%=movie.original_title%>
+                                                    </div>
+                                                    <% if(movie.vote_average !==0 ) { %>
+                                                        <div class="score m-0 mt-1">
+                                                            <%=movie.vote_average%>
+                                                        </div>
+                                                        <% } %>
+                                                </div>
+                                </div>
+                            </a>
+                        </div>
+                        <% } %>
                 </div>
                 <nav class="pagination-outer mt-5" aria-label="Page navigation">
                     <ul class="pagination">
@@ -76,14 +75,15 @@
                                 <% } %>
                                     <% } else {%>
                                         <% for(let i=1; i<9; i++) {%>
-                                            <li class="page-item  <%=parseInt(page) === i ? " active" : "" %>"><a
-                                                    class="page-link" href="<%=baseUrl%>page=<%=i%>">
+                                            <li class="page-item  <%=parseInt(page) === i ? " active" : "" %>">
+                                                <a class="page-link" href="<%=baseUrl%>page=<%=i%>">
                                                     <%=i%>
-                                                </a></li>
+                                                </a>
+                                            </li>
                                             <% } %>
                                                 <% } %>
-                                                    <li class="page-item">
-                                                        <a href="<%=baseUrl%>page=<%=parseInt(page) + 1%>"
+                                                    <li class="page-item <%= page == totalPages ? 'disabled' : null%> ">
+                                                        <a href=" <%=baseUrl%>page=<%=parseInt(page) + 1%>"
                                                             class="page-link" aria-label="Next">
                                                             <span aria-hidden="true">»</span>
                                                         </a>

@@ -118,6 +118,7 @@ app.all("*", (req, res) => {
 //Error handeling
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = 'Something went wrong' } = err
+  statusCode === 404 ? res.redirect('/notfound') : null
   res.status(statusCode).send(message)
 });
 
